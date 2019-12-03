@@ -5,9 +5,10 @@ import styled from 'styled-components'
 import tw from 'tailwind.macro'
 import Project from '../components/project'
 import tailwind from '../../tailwind'
+import { Fade } from 'react-awesome-reveal'
 
 const Section = styled.section`
-  ${tw`container`}
+  ${tw`container`};
 `
 
 const Container = styled.div`
@@ -17,7 +18,7 @@ const Container = styled.div`
 `
 
 const CardContainer = styled.div`
-  ${tw`mb-4`}
+  ${tw`mb-4`};
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-gap: 30px;
@@ -32,14 +33,14 @@ const CardContainer = styled.div`
 `
 
 const Title = styled.div`
-  ${tw`font-sans font-extrabold text-3xl my-4 mb-10`}
+  ${tw`font-sans font-extrabold text-3xl my-4 mb-10`};
 `
 
 const Projects = () => {
   const {
     github: {
-      viewer: { pinnedItems },
-    },
+      viewer: { pinnedItems }
+    }
   } = useStaticQuery(
     graphql`
       query {
@@ -74,18 +75,20 @@ const Projects = () => {
     <Section>
       <Container>
         <Title>Projects</Title>
-        <CardContainer>
-          {pinnedItems.edges.map(({ node }) => (
-            <Project
-              key={node.id}
-              description={node.description}
-              name={node.name}
-              primaryLanguage={node.primaryLanguage}
-              stargazers={node.stargazers}
-              url={node.url}
-            />
-          ))}
-        </CardContainer>
+        <Fade triggerOnce>
+          <CardContainer>
+            {pinnedItems.edges.map(({ node }) => (
+              <Project
+                key={node.id}
+                description={node.description}
+                name={node.name}
+                primaryLanguage={node.primaryLanguage}
+                stargazers={node.stargazers}
+                url={node.url}
+              />
+            ))}
+          </CardContainer>
+        </Fade>
       </Container>
     </Section>
   )

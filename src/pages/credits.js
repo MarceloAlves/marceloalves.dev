@@ -5,8 +5,8 @@ const Credits = () => {
     <>
       <li>
         Photo by Ferenc Horvath
-        (https://unsplash.com/@designhorf?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on
-        Unsplash
+        (https://unsplash.com/@designhorf?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
+        on Unsplash
       </li>
     </>
   )

@@ -39,7 +39,11 @@ const Hero = () => {
 
   return (
     <HeroContainer>
-      <BackgroundImage Tag={'div'} fluid={desktop.childImageSharp.fluid} backgroundColor={'#fff'}>
+      <BackgroundImage
+        Tag={'div'}
+        fluid={desktop.childImageSharp.fluid}
+        backgroundColor={'#fff'}
+      >
         <Column>
           <Title>
             <span role="img" aria-label="waving hand emoji">

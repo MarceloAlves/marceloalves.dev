@@ -6,7 +6,7 @@ import Projects from './projects'
 
 const IndexPage = () => (
   <Layout>
-    <SEO />
+    <SEO title={'Marcelo Alves'} />
     <Hero />
     <Projects />
   </Layout>
