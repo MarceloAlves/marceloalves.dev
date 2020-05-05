@@ -1,18 +1,18 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import 'typeface-cantata-one'
-import 'typeface-open-sans'
+import { ThemeProvider, CSSReset, theme } from '@chakra-ui/core'
 
 const Layout = ({ children }) => {
   return (
-    <>
+    <ThemeProvider theme={theme}>
+      <CSSReset />
       <main>{children}</main>
-    </>
+    </ThemeProvider>
   )
 }
 
 Layout.propTypes = {
-  children: PropTypes.node.isRequired
+  children: PropTypes.node.isRequired,
 }
 
 export default Layout

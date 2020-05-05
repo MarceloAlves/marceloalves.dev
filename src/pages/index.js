@@ -1,8 +1,5 @@
 import React from 'react'
-import Layout from '../components/layout'
-import SEO from '../components/seo'
-import Hero from './hero'
-import Projects from './projects'
+import { Layout, SEO, Hero, Projects } from '../components'
 
 const IndexPage = () => (
   <Layout>
