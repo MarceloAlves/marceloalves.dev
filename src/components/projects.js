@@ -1,9 +1,8 @@
 import React from 'react'
 import { useStaticQuery, graphql } from 'gatsby'
 import Project from '../components/project'
-import backgroundSvg from '../images/i-like-food.svg'
 import { SimpleGrid, Heading, Box } from '@chakra-ui/core'
-import { useTrail, animated } from 'react-spring'
+import { useSprings, useSpring, animated } from 'react-spring'
 
 const Projects = () => {
   const {
@@ -26,6 +25,15 @@ const Projects = () => {
                       totalCount
                     }
                     description
+                    languages(first: 10) {
+                      edges {
+                        node {
+                          id
+                          color
+                          name
+                        }
+                      }
+                    }
                     primaryLanguage {
                       name
                       color
@@ -40,30 +48,37 @@ const Projects = () => {
     `
   )
 
-  const trail = useTrail(6, { opacity: 1, from: { opacity: 0 } })
+  const direction = ['left', 'right']
+  const springs = useSprings(
+    pinnedItems.edges.length,
+    pinnedItems.edges.map((item, idx) => ({
+      from: { [direction[idx % 2]]: -1000 },
+      to: { [direction[idx % 2]]: 0 },
+    }))
+  )
+  const fadeIn = useSpring({
+    to: { opacity: 1 },
+    from: { opacity: 0 },
+    config: { duration: 500 },
+  })
 
   return (
-    <Box
-      padding='50px'
-      backgroundImage={`url(${backgroundSvg})`}
-      backgroundColor='#9aa3e5'
-      backgroundAttachment='fixed'
-    >
-      <Heading pb='4'>Projects</Heading>
-      <SimpleGrid
-        columns={{ sm: 1, md: 2, lg: 3 }}
-        spacingX='20px'
-        spacingY='20px'
-      >
-        {pinnedItems.edges.map(({ node }, idx) => (
+    <Box>
+      <animated.div style={fadeIn}>
+        <Heading pb='4' fontWeight={400}>
+          Projects
+        </Heading>
+      </animated.div>
+      <SimpleGrid columns={{ sm: 1, md: 2 }} spacingX='30px' spacingY='30px'>
+        {springs.map((props, idx) => (
           <Project
-            key={node.id}
-            animatedStyles={trail[idx]}
-            description={node.description}
-            name={node.name}
-            primaryLanguage={node.primaryLanguage}
-            stargazers={node.stargazers}
-            url={node.url}
+            key={pinnedItems.edges[idx].node.id}
+            animatedStyles={props}
+            description={pinnedItems.edges[idx].node.description}
+            name={pinnedItems.edges[idx].node.name}
+            primaryLanguage={pinnedItems.edges[idx].node.primaryLanguage}
+            stargazers={pinnedItems.edges[idx].node.stargazers}
+            url={pinnedItems.edges[idx].node.url}
           />
         ))}
       </SimpleGrid>

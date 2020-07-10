@@ -19,6 +19,8 @@ const Project = ({
       backgroundColor='white'
       rounded='lg'
       padding='20px'
+      position='relative'
+      boxShadow='lg'
     >
       <Box display='flex' justifyContent='space-between' mb='30px'>
         <Text
