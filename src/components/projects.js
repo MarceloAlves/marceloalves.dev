@@ -63,9 +63,9 @@ const Projects = () => {
   })
 
   return (
-    <Box>
+    <Box paddingBottom='2em'>
       <animated.div style={fadeIn}>
-        <Heading pb='4' fontWeight={400}>
+        <Heading pb='4' fontWeight={400} style={fadeIn}>
           Projects
         </Heading>
       </animated.div>
